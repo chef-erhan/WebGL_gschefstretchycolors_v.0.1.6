@@ -1,69 +1,40 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
-  <!--    <meta charset="utf-8">-->
-  <title>Unity WebGL Player | Stretchy Colors</title>
-</head>
-<body style="text-align: center; padding: 0; border: 0; margin: 0;">
-<canvas id="unity-canvas" width=450 height=600 style="width: 450px; height: 600px; background: #231F20"></canvas>
-<script src="Build/WebGL_gschefstretchycolors_v.0.1.6.loader.js"></script>
-<script>
-  let aFunctionImplementedInHtmlFile = function () {
-    console.log("------> FUCKKKKK.....");
-  }
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Stretchy Colors</title>
+  </head>
+  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <canvas id="unity-canvas" width=450 height=600 style="width: 450px; height: 600px; background: #231F20"></canvas>
+    <script src="Build/WebGL_gschefstretchycolors_v.0.1.6.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
 
-  let canvas = document.querySelector("#unity-canvas");
-  let myGameInstance;
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.position = "fixed";
 
-  createUnityInstance(canvas, {
-    dataUrl: "Build/WebGL_gschefstretchycolors_v.0.1.6.data",
-    frameworkUrl: "Build/WebGL_gschefstretchycolors_v.0.1.6.framework.js",
-    codeUrl: "Build/WebGL_gschefstretchycolors_v.0.1.6.wasm",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "CHEF Game Studio",
-    productName: "Stretchy Colors",
-    productVersion: "0.1.6",
-    // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-    // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-  }).then((unityInstance) => {
-    myGameInstance = unityInstance;
-  }).catch((message) => {
-    alert(message);
-  });
+        document.body.style.textAlign = "left";
+      }
 
-  window.onmessage = function (e) {
-    if (e.data.message == "SetResolution") {
-
-      console.log("WebGL Script!!! width: " + e.data.width + " height: " + e.data.height);
-
-      canvas.style.width = e.data.width + "px";
-      canvas.style.height = e.data.height + "px";
-      canvas.style.scale = 600 / e.data.height;
-      canvas.style.transformOrigin = "0 0";
-
-      let resolution = {
-        width: e.data.width,
-        height: e.data.height
-      };
-      // unity.SendMessage("WebGLManager", "SetResolution", JSON.stringify(resolution));
-
-      myGameInstance.SendMessage("Bridge", "SetCanvasReferenceResolution", JSON.stringify(resolution));
-    } else if (e.data.message == "SetUserInteractionData") {
-
-      console.log("iFrame Unity -> userInteractionData: " + JSON.stringify(e.data.uiInteractionDataJsonString));
-      console.log("iFrame Unity -> userInteractionData: " + JSON.stringify(e.data.worldInteractionDataJsonString));
-      console.log("iFrame Unity -> userInteractionData: " + JSON.stringify(e.data.additionalDataJsonString));
-
-      let interactions = {
-        ui: JSON.stringify(e.data.uiInteractionDataJsonString),
-        world: JSON.stringify(e.data.worldInteractionDataJsonString),
-        additional: JSON.stringify(e.data.additionalDataJsonString)
-      };
-
-      // unity.SendMessage("Bridge", "SetUserInteractionData", JSON.stringify(e.data.uiInteractionDataJsonString), JSON.stringify(e.data.worldInteractionDataJsonString));
-      myGameInstance.SendMessage("Bridge", "SetUserInteractionData", JSON.stringify(interactions));
-    }
-  }
-</script>
-</body>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/WebGL_gschefstretchycolors_v.0.1.6.data",
+        frameworkUrl: "Build/WebGL_gschefstretchycolors_v.0.1.6.framework.js",
+        codeUrl: "Build/WebGL_gschefstretchycolors_v.0.1.6.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "CHEF Game Studio",
+        productName: "Stretchy Colors",
+        productVersion: "0.1.6",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    </script>
+  </body>
 </html>
