@@ -9,6 +9,11 @@
 <canvas id="unity-canvas" width=450 height=600 style="width: 450px; height: 600px; background: #231F20"></canvas>
 <script src="Build/WebGL_gschefstretchycolors_v.0.1.6.loader.js"></script>
 <script>
+
+    function aFunctionImplementedInHtmlFile(jsString) {
+        alert('from index.html :"' + jsString + '"');
+    }
+    
     var canvas = document.querySelector("#unity-canvas");
     var unity;
 
