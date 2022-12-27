@@ -1159,29 +1159,29 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 4237112: function() {
+ 4237176: function() {
   Module["emscripten_get_now_backup"] = performance.now;
  },
- 4237167: function($0) {
+ 4237231: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 4237215: function($0) {
+ 4237279: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 4237263: function() {
+ 4237327: function() {
   performance.now = Module["emscripten_get_now_backup"];
  },
- 4237318: function() {
+ 4237382: function() {
   return Module.webglContextAttributes.premultipliedAlpha;
  },
- 4237379: function() {
+ 4237443: function() {
   return Module.webglContextAttributes.preserveDrawingBuffer;
  },
- 4237443: function() {
+ 4237507: function() {
   return Module.webglContextAttributes.powerPreference;
  }
 };
@@ -8121,8 +8121,9 @@ function ___sys_unlink(path) {
 }
 
 function _aFunctionImplementedInJavaScriptLibraryFile(utf8String) {
+ var jsString = UTF8ToString(utf8String);
  console.log("------\x3e FUCKKKKK jslib.....");
- aFunctionImplementedInHtmlFile();
+ aFunctionImplementedInHtmlFile(jsString);
 }
 
 function _abort() {
