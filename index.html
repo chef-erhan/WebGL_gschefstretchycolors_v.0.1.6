@@ -10,6 +10,11 @@
 <script>
   function aFunctionImplementedInHtmlFile() {
     console.log("------> FUCKKKKK html.....");
+
+    window.top.postMessage({
+      message: "ReceiveMessageFromUnity",
+      data: txt
+    }, "*");
   }
 
   let canvas = document.querySelector("#unity-canvas");
